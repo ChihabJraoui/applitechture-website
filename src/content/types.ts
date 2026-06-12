@@ -1,3 +1,8 @@
+export type CaseStudySlug =
+  | "logistics-dispatch"
+  | "clinic-booking"
+  | "retail-inventory";
+
 export type Service = {
   slug: string;
   title: string;
@@ -5,11 +10,11 @@ export type Service = {
   problem: string; // detail page: the situation
   whatWeDo: string[]; // detail page: paragraphs
   deliverables: string[];
-  caseStudySlug?: string;
+  caseStudySlug?: CaseStudySlug;
 };
 
 export type CaseStudy = {
-  slug: string;
+  slug: CaseStudySlug;
   client: string; // anonymized descriptor
   problem: string;
   solution: string;

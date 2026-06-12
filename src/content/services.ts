@@ -1,6 +1,6 @@
 import type { Service } from "./types";
 
-export const services: Service[] = [
+export const services = [
   {
     slug: "custom-apps",
     title: "Custom Web & Mobile Apps",
@@ -72,8 +72,9 @@ export const services: Service[] = [
       "A scoped first project you can start immediately",
     ],
   },
-];
+] as const satisfies readonly Service[];
 
 export function getService(slug: string): Service | undefined {
-  return services.find((s) => s.slug === slug);
+  const list: readonly Service[] = services;
+  return list.find((s) => s.slug === slug);
 }

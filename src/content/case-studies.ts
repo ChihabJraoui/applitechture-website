@@ -2,7 +2,7 @@ import type { CaseStudy } from "./types";
 
 // DRAFT CONTENT: realistic anonymized placeholders.
 // Replace problem/solution/outcome with real project details before launch.
-export const caseStudies: CaseStudy[] = [
+export const caseStudies = [
   {
     slug: "logistics-dispatch",
     client: "A regional logistics company",
@@ -32,8 +32,9 @@ export const caseStudies: CaseStudy[] = [
     outcome:
       "Stockouts down 40%; reordering now takes one hour a week instead of a day.",
   },
-];
+] as const satisfies readonly CaseStudy[];
 
 export function getCaseStudy(slug: string): CaseStudy | undefined {
-  return caseStudies.find((c) => c.slug === slug);
+  const list: readonly CaseStudy[] = caseStudies;
+  return list.find((c) => c.slug === slug);
 }
