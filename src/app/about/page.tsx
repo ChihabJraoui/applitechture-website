@@ -46,7 +46,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <h2 className="text-terracotta mt-14 mb-6 text-sm font-medium tracking-widest uppercase">
+            <h2 className="text-terracotta-dark mt-14 mb-6 text-sm font-medium tracking-widest uppercase">
               What we believe
             </h2>
             <div className="grid gap-5 sm:grid-cols-3">

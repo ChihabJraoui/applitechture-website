@@ -41,12 +41,12 @@ export default async function ServicePage({
               {service.title}
             </h1>
 
-            <h2 className="text-terracotta mt-12 text-sm font-medium tracking-widest uppercase">
+            <h2 className="text-terracotta-dark mt-12 text-sm font-medium tracking-widest uppercase">
               Sound familiar?
             </h2>
             <p className="text-stone mt-3 text-lg">{service.problem}</p>
 
-            <h2 className="text-terracotta mt-10 text-sm font-medium tracking-widest uppercase">
+            <h2 className="text-terracotta-dark mt-10 text-sm font-medium tracking-widest uppercase">
               What we do
             </h2>
             {service.whatWeDo.map((p) => (
@@ -55,7 +55,7 @@ export default async function ServicePage({
               </p>
             ))}
 
-            <h2 className="text-terracotta mt-10 text-sm font-medium tracking-widest uppercase">
+            <h2 className="text-terracotta-dark mt-10 text-sm font-medium tracking-widest uppercase">
               What you get
             </h2>
             <ul className="mt-3 space-y-2">

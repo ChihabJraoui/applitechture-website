@@ -12,7 +12,7 @@ export function AboutTeaser() {
           CJ
         </div>
         <div>
-          <p className="text-terracotta mb-3 text-sm font-medium tracking-widest uppercase">
+          <p className="text-terracotta-dark mb-3 text-sm font-medium tracking-widest uppercase">
             Who&apos;s behind this
           </p>
           <p className="font-display max-w-2xl text-2xl leading-snug">
