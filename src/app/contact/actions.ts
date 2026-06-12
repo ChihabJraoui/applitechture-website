@@ -34,17 +34,32 @@ export async function sendInquiry(
     };
   }
 
+  if (message.length > 5000 || name.length > 200 || budget.length > 200) {
+    return {
+      status: "error",
+      message: "That message is a little too long — mind trimming it down?",
+    };
+  }
+
+  const safeName = name.replace(/[\r\n]+/g, " ").slice(0, 100);
+
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
-    await resend.emails.send({
+    const { error } = await resend.emails.send({
       // onboarding@resend.dev works without domain verification;
       // switch to a verified applitechture.com sender when the domain is set up in Resend.
       from: "Applitechture website <onboarding@resend.dev>",
       to: site.email,
       replyTo: email,
-      subject: `New project inquiry from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\nBudget: ${budget || "not specified"}\n\n${message}`,
+      subject: `New project inquiry from ${safeName}`,
+      text: `Name: ${safeName}\nEmail: ${email}\nBudget: ${budget || "not specified"}\n\n${message}`,
     });
+    if (error) {
+      return {
+        status: "error",
+        message: `Something went wrong sending your message. Email us directly at ${site.email}.`,
+      };
+    }
     return { status: "success" };
   } catch {
     return {

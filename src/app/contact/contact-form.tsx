@@ -55,7 +55,9 @@ export function ContactForm() {
         <Textarea id="message" name="message" rows={5} required />
       </div>
       {state?.status === "error" ? (
-        <p className="text-terracotta text-sm">{state.message}</p>
+        <p role="alert" className="text-terracotta text-sm">
+          {state.message}
+        </p>
       ) : null}
       <Button
         type="submit"
