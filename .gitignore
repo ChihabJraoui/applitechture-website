@@ -33,3 +33,7 @@ yarn-error.log*
 # vercel
 .vercel
 .superpowers/
+
+# build artifacts
+tsconfig.tsbuildinfo
+.playwright-mcp/
