@@ -30,7 +30,7 @@ export async function sendInquiry(
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return {
       status: "error",
-      message: "That email address doesn&apos;t look right — mind checking it?",
+      message: "That email address doesn't look right — mind checking it?",
     };
   }
 
