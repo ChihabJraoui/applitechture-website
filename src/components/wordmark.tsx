@@ -1,6 +1,6 @@
-export function Wordmark({ className = "text-xl" }: { className?: string }) {
+export function Wordmark({ className = "" }: { className?: string }) {
   return (
-    <span className={`font-semibold tracking-tight ${className}`}>
+    <span className={`text-xl font-semibold tracking-tight ${className}`}>
       applitechture<span className="text-terracotta">.</span>
     </span>
   );

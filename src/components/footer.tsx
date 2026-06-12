@@ -11,7 +11,7 @@ export function Footer() {
           <Wordmark />
           <p className="text-stone mt-2 max-w-xs text-sm">{site.tagline}</p>
         </div>
-        <nav className="text-stone flex gap-6 text-sm">
+        <nav aria-label="Footer" className="text-stone flex gap-6 text-sm">
           <Link href="/services" className="hover:text-ink">
             Services
           </Link>
