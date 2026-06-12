@@ -5,7 +5,11 @@ import { site } from "@/content/site";
 
 export type InquiryState =
   | { status: "success" }
-  | { status: "error"; message: string }
+  | {
+      status: "error";
+      message: string;
+      values?: { name: string; email: string; budget: string; message: string };
+    }
   | null;
 
 export async function sendInquiry(
@@ -20,17 +24,21 @@ export async function sendInquiry(
   const message = String(formData.get("message") ?? "").trim();
   const budget = String(formData.get("budget") ?? "").trim();
 
+  const vals = { name, email, budget, message };
+
   if (!name || !email || !message) {
     return {
       status: "error",
       message:
         "Please fill in your name, email, and a few words about the project.",
+      values: vals,
     };
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return {
       status: "error",
       message: "That email address doesn't look right — mind checking it?",
+      values: vals,
     };
   }
 
@@ -38,6 +46,7 @@ export async function sendInquiry(
     return {
       status: "error",
       message: "That message is a little too long — mind trimming it down?",
+      values: vals,
     };
   }
 
@@ -58,6 +67,7 @@ export async function sendInquiry(
       return {
         status: "error",
         message: `Something went wrong sending your message. Email us directly at ${site.email}.`,
+        values: vals,
       };
     }
     return { status: "success" };
@@ -65,6 +75,7 @@ export async function sendInquiry(
     return {
       status: "error",
       message: `Something went wrong sending your message. Email us directly at ${site.email}.`,
+      values: vals,
     };
   }
 }

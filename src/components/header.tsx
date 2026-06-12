@@ -11,7 +11,7 @@ const nav = [
 export function Header() {
   return (
     <header className="border-sand-dark bg-cream border-b">
-      <Container className="flex h-16 items-center justify-between">
+      <Container className="flex h-16 items-center justify-between gap-4">
         <Link href="/" aria-label={`${site.name} home`}>
           <Wordmark />
         </Link>
@@ -27,7 +27,7 @@ export function Header() {
           ))}
           <Link
             href="/contact"
-            className="bg-ink text-cream hover:bg-terracotta rounded-full px-4 py-2 text-sm transition-colors"
+            className="bg-ink text-cream hover:bg-terracotta rounded-full px-4 py-2 text-sm whitespace-nowrap transition-colors"
           >
             Start a project
           </Link>

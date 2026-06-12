@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,8 +8,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { sendInquiry, type InquiryState } from "./actions";
 
 export function ContactForm() {
+  // errorKey increments on each error submission so the form remounts with
+  // fresh defaultValues (React 19 resets uncontrolled inputs after action).
+  const [errorKey, setErrorKey] = useState(0);
   const [state, formAction, pending] = useActionState<InquiryState, FormData>(
-    sendInquiry,
+    async (prev, formData) => {
+      const result = await sendInquiry(prev, formData);
+      if (result?.status === "error") {
+        setErrorKey((k) => k + 1);
+      }
+      return result;
+    },
     null,
   );
 
@@ -24,8 +33,12 @@ export function ContactForm() {
     );
   }
 
+  const values = state?.status === "error" ? state.values : undefined;
+  // Key changes on each error submission so React remounts inputs with fresh defaultValues.
+  const formKey = state?.status === "error" ? `error-${errorKey}` : "initial";
+
   return (
-    <form action={formAction} className="space-y-5">
+    <form key={formKey} action={formAction} className="space-y-5">
       <input
         type="text"
         name="website"
@@ -36,11 +49,17 @@ export function ContactForm() {
       />
       <div className="space-y-2">
         <Label htmlFor="name">Your name</Label>
-        <Input id="name" name="name" required />
+        <Input id="name" name="name" required defaultValue={values?.name} />
       </div>
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
-        <Input id="email" name="email" type="email" required />
+        <Input
+          id="email"
+          name="email"
+          type="email"
+          required
+          defaultValue={values?.email}
+        />
       </div>
       <div className="space-y-2">
         <Label htmlFor="budget">Budget range (optional)</Label>
@@ -48,11 +67,18 @@ export function ContactForm() {
           id="budget"
           name="budget"
           placeholder="e.g. $5k–15k, or 'no idea yet'"
+          defaultValue={values?.budget}
         />
       </div>
       <div className="space-y-2">
         <Label htmlFor="message">What are you trying to build or fix?</Label>
-        <Textarea id="message" name="message" rows={5} required />
+        <Textarea
+          id="message"
+          name="message"
+          rows={5}
+          required
+          defaultValue={values?.message}
+        />
       </div>
       {state?.status === "error" ? (
         <p role="alert" className="text-terracotta text-sm">
