@@ -9,6 +9,7 @@ export default function OgImage() {
   return new ImageResponse(
     <div
       style={{
+        // Hex values mirror the brand tokens in globals.css — Satori can't resolve CSS variables.
         width: "100%",
         height: "100%",
         display: "flex",
@@ -26,7 +27,7 @@ export default function OgImage() {
         {site.tagline}
       </div>
       <div
-        style={{ fontSize: 28, marginTop: 24, color: "#78716c", maxWidth: 800 }}
+        style={{ fontSize: 28, marginTop: 24, color: "#6e6862", maxWidth: 800 }}
       >
         {site.description}
       </div>

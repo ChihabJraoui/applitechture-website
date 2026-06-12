@@ -7,6 +7,7 @@ export default function Icon() {
   return new ImageResponse(
     <div
       style={{
+        // Hex values mirror the brand tokens in globals.css — Satori can't resolve CSS variables.
         width: "100%",
         height: "100%",
         display: "flex",
