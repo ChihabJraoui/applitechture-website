@@ -1,3 +1,19 @@
+import { Hero } from "@/components/home/hero";
+import { ServicesSection } from "@/components/home/services-section";
+import { WorkSection } from "@/components/home/work-section";
+import { ProcessSection } from "@/components/home/process-section";
+import { AboutTeaser } from "@/components/home/about-teaser";
+import { CtaBand } from "@/components/cta-band";
+
 export default function Home() {
-  return <h1 className="font-display p-10 text-4xl">Applitechture</h1>;
+  return (
+    <>
+      <Hero />
+      <ServicesSection />
+      <WorkSection />
+      <ProcessSection />
+      <AboutTeaser />
+      <CtaBand />
+    </>
+  );
 }
