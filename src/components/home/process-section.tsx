@@ -10,7 +10,12 @@ export function ProcessSection() {
         <ol className="grid gap-5 sm:grid-cols-3">
           {processSteps.map((step, i) => (
             <li key={step.title} className="bg-cream rounded-2xl p-7">
-              <p className="font-display text-terracotta text-3xl">{i + 1}</p>
+              <p
+                className="font-display text-terracotta text-3xl"
+                aria-hidden="true"
+              >
+                {i + 1}
+              </p>
               <h3 className="font-display mt-3 text-xl">{step.title}</h3>
               <p className="text-stone mt-2 text-sm">{step.description}</p>
             </li>

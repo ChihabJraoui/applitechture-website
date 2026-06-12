@@ -20,7 +20,7 @@ export function ServicesSection() {
             >
               <h3 className="font-display text-xl">{s.title}</h3>
               <p className="text-stone mt-2 text-sm">{s.summary}</p>
-              <p className="text-terracotta mt-4 text-sm font-medium opacity-0 transition-opacity group-hover:opacity-100">
+              <p className="text-terracotta mt-4 text-sm font-medium opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
                 Learn more →
               </p>
             </Link>
