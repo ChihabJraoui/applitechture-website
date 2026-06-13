@@ -98,17 +98,19 @@ export function WorkStrip() {
   useEffect(() => {
     if (!pinnable || !wrap.current || !track.current) return;
     const ctx = gsap.context(() => {
-      const distance = track.current!.scrollWidth - wrap.current!.clientWidth;
+      const getDistance = () =>
+        track.current!.scrollWidth - wrap.current!.clientWidth;
       gsap.to(track.current, {
-        x: -distance,
+        x: () => -getDistance(),
         ease: "none",
         scrollTrigger: {
           trigger: wrap.current,
           start: "top top",
-          end: () => `+=${distance}`,
+          end: () => `+=${getDistance()}`,
           scrub: 0.6,
           pin: true,
           anticipatePin: 1,
+          invalidateOnRefresh: true,
           onUpdate: (self) =>
             setActiveIdx(
               Math.min(

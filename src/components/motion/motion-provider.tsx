@@ -48,6 +48,12 @@ export function MotionProvider({ children }: { children: React.ReactNode }) {
     gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
+    // Web fonts can shift layout after first paint; refresh once they're ready
+    // so Reveal/temperature/pin trigger positions are measured against final metrics.
+    if (typeof document !== "undefined" && "fonts" in document) {
+      document.fonts.ready.then(() => ScrollTrigger.refresh());
+    }
+
     return () => {
       gsap.ticker.remove(raf);
       // Restore GSAP's default lag-smoothing after tearing down the raf hook.
