@@ -19,7 +19,7 @@ export function Magnetic({ children }: { children: React.ReactNode }) {
     });
   };
   const onLeave = () => {
-    if (!ref.current) return;
+    if (reduced || !ref.current) return;
     gsap.to(ref.current, {
       x: 0,
       y: 0,

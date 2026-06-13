@@ -109,6 +109,11 @@
     var(--color-coal);
 }
 
+/* Hide split headings until GSAP takes over — only when motion is active. */
+.js-motion [data-split] {
+  visibility: hidden;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .scroll-cue > div {
     animation: cue 1.6s ease-in-out infinite;
