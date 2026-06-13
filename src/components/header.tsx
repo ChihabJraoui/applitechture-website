@@ -30,7 +30,7 @@ export function Header() {
           <Magnetic>
             <Link
               href="/contact"
-              className="bg-ember text-warm-white hover:bg-ember/90 active:bg-ember-dark rounded-full px-4 py-2 text-sm whitespace-nowrap transition-colors"
+              className="bg-ember text-warm-white hover:bg-ember/90 active:bg-ember-dark hidden rounded-full px-4 py-2 text-sm whitespace-nowrap transition-colors sm:inline-block"
             >
               Start a project
             </Link>
