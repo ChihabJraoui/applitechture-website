@@ -108,3 +108,20 @@
     ),
     var(--color-coal);
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-cue > div {
+    animation: cue 1.6s ease-in-out infinite;
+  }
+  @keyframes cue {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    60% {
+      transform: translateY(14px);
+      opacity: 0.2;
+    }
+  }
+}

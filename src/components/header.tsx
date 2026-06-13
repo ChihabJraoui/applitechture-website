@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/container";
+import { HeaderChrome } from "@/components/header-chrome";
+import { Magnetic } from "@/components/motion/magnetic";
 import { Wordmark } from "@/components/wordmark";
 import { site } from "@/content/site";
 
@@ -10,7 +12,7 @@ const nav = [
 
 export function Header() {
   return (
-    <header className="border-char-light bg-coal border-b">
+    <HeaderChrome>
       <Container className="flex h-16 items-center justify-between gap-4">
         <Link href="/" aria-label={`${site.name} home`}>
           <Wordmark />
@@ -25,14 +27,16 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-          <Link
-            href="/contact"
-            className="bg-ember text-warm-white hover:bg-ember/90 active:bg-ember-dark rounded-full px-4 py-2 text-sm whitespace-nowrap transition-colors"
-          >
-            Start a project
-          </Link>
+          <Magnetic>
+            <Link
+              href="/contact"
+              className="bg-ember text-warm-white hover:bg-ember/90 active:bg-ember-dark rounded-full px-4 py-2 text-sm whitespace-nowrap transition-colors"
+            >
+              Start a project
+            </Link>
+          </Magnetic>
         </nav>
       </Container>
-    </header>
+    </HeaderChrome>
   );
 }
