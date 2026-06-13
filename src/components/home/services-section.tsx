@@ -19,7 +19,10 @@ export function ServicesSection() {
                 href={`/services/${s.slug}`}
                 className="group border-scale bg-iron hover:border-ember relative h-full rounded-2xl border p-7 transition-[color,transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:shadow-[0_0_50px_rgba(245,158,11,0.18)]"
               >
-                <span className="text-ash/70 absolute top-5 right-6 font-mono text-xs tracking-widest">
+                <span
+                  aria-hidden="true"
+                  className="text-ash/70 absolute top-5 right-6 font-mono text-xs tracking-widest"
+                >
                   SVC.0{i + 1}
                 </span>
                 <h3 className="font-display text-xl">{s.title}</h3>
