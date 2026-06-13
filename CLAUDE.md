@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Marketing site for Applitechture software studio. Dark "Ember" immersive redesign completed per `.plans/2026-06-13-ember-immersive-redesign-design.md` (latest; supersedes the visual-theme portion of the prior v2 spec). Goal is lead generation funneling to `/contact`. Case studies in `src/content/case-studies.ts` are DRAFT placeholders — three anonymised entries pending real client stories before going public.
+Marketing site for Emberworks software studio. Dark **"forged" immersive redesign** completed per `.plans/2026-06-13-emberworks-forge-redesign-design.md` (latest; single-hue incandescence palette, scroll progress = forge heat). Goal is lead generation funneling to `/contact`. Case studies in `src/content/case-studies.ts` are DRAFT placeholders — three anonymised entries pending real client stories before going public.
 
 ## Commands
 
@@ -27,20 +27,35 @@ No test suite — build + lint are the quality gates.
 - **Deployment:** Vercel
 - **Motion:** three + @react-three/fiber (persistent WebGL scene), gsap + ScrollTrigger + SplitText, lenis smooth scroll, zustand
 
-**Ember brand tokens** (`@theme` in `globals.css`):
+**Incandescence Ramp tokens** (`@theme` in `globals.css`):
 
-| Token        | Value                  | Role                                 |
-| ------------ | ---------------------- | ------------------------------------ |
-| `coal`       | `#0c0a09`              | page background                      |
-| `char`       | `#1c1917`              | cards, elevated surfaces             |
-| `char-light` | `#292524`              | borders, dividers                    |
-| `warm-white` | `#fafaf9`              | headings + body text                 |
-| `ash`        | `#a8a29e`              | secondary text (AA on coal)          |
-| `ember`      | `#ea580c`              | accent: CTAs, links, wordmark period |
-| `ember-glow` | `rgba(234,88,12,0.15)` | radial glows, hover halos            |
-| `ember-dark` | `#9a3412`              | pressed/active states only           |
+Substrate:
 
-Fonts: `font-display` → Fraunces (normal + italic, opsz), `font-sans` → Inter.
+| Token         | Value     | Role                               |
+| ------------- | --------- | ---------------------------------- |
+| `forge-black` | `#0b0705` | page background                    |
+| `iron`        | `#1b0f09` | cards, elevated surfaces           |
+| `scale`       | `#2a160c` | borders, dividers, forge-grid      |
+| `warm-white`  | `#faf3ee` | headings + body text               |
+| `ash`         | `#b3a79d` | secondary text (AA on forge-black) |
+
+Heat ramp (type / linework / glow / scene — climbs with scroll temperature):
+
+| Token          | Value     | ≈ Temp  | Role                              |
+| -------------- | --------- | ------- | --------------------------------- |
+| `first-heat`   | `#6b1a07` | ~550°C  | deep ember baseline               |
+| `ember-dark`   | `#9a3412` | ~700°C  | deep ember; pressed/active states |
+| `ember`        | `#ea580c` | ~850°C  | primary accent: CTAs, links       |
+| `amber`        | `#f59e0b` | ~1000°C | hotter linework and glows         |
+| `yellow-hot`   | `#fbbf24` | ~1150°C | near-peak heat                    |
+| `forge-yellow` | `#fde047` | ~1250°C | near white-hot                    |
+| `white-hot`    | `#fff7ed` | ~1350°C | CTA inversion background          |
+
+Glows: `ember-glow rgba(234,88,12,0.15)`, `amber-glow rgba(245,158,11,0.18)`.
+
+Canvas behavior: forge canvas stays dark throughout; heat climbs via type, linework, and glow. The CTA inverts to a **`white-hot` background with dark `onHot` button text** — comfortably AA contrast, one blinding climax at the ask.
+
+Fonts: `font-display` → Fraunces (normal + italic, opsz), `font-sans` → Inter, `font-mono` → JetBrains Mono (technical "forge-mark" labels: temperatures, `SVC.0n` tags).
 
 Routes: `/` `/services` `/services/[slug]` (SSG ×4) `/about` `/contact` + `sitemap.xml` `robots.txt` `icon` `og-image` `not-found`.
 
@@ -68,12 +83,12 @@ Routes: `/` `/services` `/services/[slug]` (SSG ×4) `/about` `/contact` + `site
 - ScrollTrigger refresh after fonts load.
 - Teardown rule: **never call `ScrollTrigger.killAll()`**. Every animating component scopes its triggers inside `gsap.context()` and reverts on cleanup. The provider only tears down what it owns.
 
-**`src/components/scene/`** — persistent R3F ember particle field:
+**`src/components/scene/`** — persistent R3F forge spark field:
 
 - `scene-canvas.tsx`: fixed full-viewport canvas (`position: fixed; inset: 0; z-index: -10`), mounted once in the root layout, survives route changes. Dynamically imported so first paint never waits on the Three.js chunk.
-- `ember-field.tsx`: 2–3k instanced particles (mobile: ~600) in warm orange/amber with depth fog. Reads scene store per frame.
+- `ember-field.tsx`: 2–3k forge spark particles (mobile: ~600). A single `pointsMaterial.color` lerps along the heat ramp (deep-ember → amber → white-hot) driven by the `temperature` store each frame; brightness, size, and drift all climb with heat. Reads scene store per frame via `getState()`.
 - `use-scene-store.ts`: zustand store exposing `temperature` + `pointer` (and their setters). Scene reads via `getState()` only — no per-frame React re-renders.
-- **Fallback chain:** `prefers-reduced-motion` → no-WebGL capability → WebGL context-loss → `.ember-backdrop` static gradient. The canvas is wrapped in an error boundary that degrades to the gradient; scene/motion errors never block content.
+- **Fallback chain:** `prefers-reduced-motion` → no-WebGL capability → WebGL context-loss → `.ember-backdrop` static gradient (retoned to forge-black). The canvas is wrapped in an error boundary that degrades to the gradient; scene/motion errors never block content.
 
 **Motion primitives** in `src/components/motion/`: `Reveal`, `SplitHeading`, `Magnetic`, `TemperatureDriver`. All consume `useReducedMotion` and no-op when reduced motion is active.
 

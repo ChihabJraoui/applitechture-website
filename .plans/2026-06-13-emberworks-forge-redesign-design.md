@@ -44,7 +44,7 @@ One hue. Not a flat orange — the real color-temperature of heated steel. This 
 | `ember` *(primary accent)* | `#ea580c` | 850°C |
 | `amber` | `#f59e0b` | 1000°C |
 | `yellow-hot` | `#fbbf24` | 1150°C |
-| `near-white` | `#fde047` | 1250°C |
+| `forge-yellow` | `#fde047` | 1250°C |
 | `white-hot` | `#fff7ed` | 1350°C |
 
 - `ember-glow` (radial halo) stays as `rgba(234,88,12,0.15)`; add `amber-glow` `rgba(245,158,11,0.18)` for hotter moments.
