@@ -88,7 +88,7 @@ export function ContactForm() {
       <Button
         type="submit"
         disabled={pending}
-        className="bg-ember hover:bg-ember/90 active:bg-terracotta-dark rounded-full px-8"
+        className="bg-ember hover:bg-ember/90 active:bg-ember-dark rounded-full px-8"
       >
         {pending ? "Sending…" : "Send message"}
       </Button>

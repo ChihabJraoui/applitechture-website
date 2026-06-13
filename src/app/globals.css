@@ -9,7 +9,7 @@
   --color-ash: #a8a29e;
   --color-ember: #ea580c;
   --color-ember-glow: rgba(234, 88, 12, 0.15);
-  --color-terracotta-dark: #9a3412;
+  --color-ember-dark: #9a3412;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
@@ -86,8 +86,8 @@
   background:
     radial-gradient(
       ellipse 70% 80% at 50% 100%,
-      rgba(234, 88, 12, 0.18) 0%,
+      var(--color-ember-glow) 0%,
       transparent 65%
     ),
-    #0c0a09;
+    var(--color-coal);
 }

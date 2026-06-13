@@ -27,7 +27,7 @@ export function Header() {
           ))}
           <Link
             href="/contact"
-            className="bg-ember text-warm-white hover:bg-ember/90 active:bg-terracotta-dark rounded-full px-4 py-2 text-sm whitespace-nowrap transition-colors"
+            className="bg-ember text-warm-white hover:bg-ember/90 active:bg-ember-dark rounded-full px-4 py-2 text-sm whitespace-nowrap transition-colors"
           >
             Start a project
           </Link>

@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
+    <html lang="en" className={`${inter.variable} ${fraunces.variable} dark`}>
       <body className="bg-coal text-warm-white flex min-h-screen flex-col font-sans antialiased">
         <script
           type="application/ld+json"
