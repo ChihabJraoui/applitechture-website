@@ -1,7 +1,12 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { Component, useSyncExternalStore, type ReactNode } from "react";
+import {
+  Component,
+  useState,
+  useSyncExternalStore,
+  type ReactNode,
+} from "react";
 import { useReducedMotion } from "@/components/motion/motion-provider";
 
 const SceneCanvas = dynamic(() => import("./scene-canvas"), { ssr: false });
@@ -23,13 +28,20 @@ function StaticBackdrop() {
   return <div className="ember-backdrop" aria-hidden />;
 }
 
+let webglProbe: boolean | null = null;
 function webglAvailable(): boolean {
+  if (webglProbe !== null) return webglProbe;
   try {
     const canvas = document.createElement("canvas");
-    return !!(canvas.getContext("webgl2") || canvas.getContext("webgl"));
+    const gl = canvas.getContext("webgl2") ?? canvas.getContext("webgl");
+    webglProbe = !!gl;
+    (gl as WebGLRenderingContext | null)
+      ?.getExtension("WEBGL_lose_context")
+      ?.loseContext();
   } catch {
-    return false;
+    webglProbe = false;
   }
+  return webglProbe;
 }
 
 // Hydration-safe "is mounted" flag: false on the server and during the
@@ -47,14 +59,16 @@ export function SceneRoot() {
   // Render the static backdrop on the server and during hydration; swap in
   // the canvas only after mount so SSR markup always matches the client.
   const mounted = useMounted();
+  const [lost, setLost] = useState(false);
 
-  const wantsScene = mounted && !reduced && webglAvailable();
+  const webglOk = mounted && webglAvailable();
+  const wantsScene = mounted && !reduced && !lost && webglOk;
 
   return (
     <div className="fixed inset-0 -z-10" aria-hidden>
       {wantsScene ? (
         <SceneErrorBoundary fallback={<StaticBackdrop />}>
-          <SceneCanvas />
+          <SceneCanvas onContextLost={() => setLost(true)} />
         </SceneErrorBoundary>
       ) : (
         <StaticBackdrop />

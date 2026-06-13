@@ -45,14 +45,15 @@ export function EmberField({ count }: { count: number }) {
   }, [count]);
 
   useFrame((_, delta) => {
+    const dt = Math.min(delta, 0.1);
     const { temperature, pointer } = useSceneStore.getState();
     const geo = points.current?.geometry;
     if (!geo) return;
     const pos = geo.attributes.position.array as Float32Array;
     const speedScale = 0.4 + temperature * 0.9;
     for (let i = 0; i < count; i++) {
-      pos[i * 3 + 1] += speeds[i] * delta * speedScale;
-      pos[i * 3] += Math.sin(pos[i * 3 + 1] * 0.5 + i) * delta * 0.06;
+      pos[i * 3 + 1] += speeds[i] * dt * speedScale;
+      pos[i * 3] += Math.sin(pos[i * 3 + 1] * 0.5 + i) * dt * 0.06;
       if (pos[i * 3 + 1] > BOUNDS.y) pos[i * 3 + 1] = -BOUNDS.y;
     }
     geo.attributes.position.needsUpdate = true;

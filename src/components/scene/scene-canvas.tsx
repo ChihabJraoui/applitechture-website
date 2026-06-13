@@ -22,7 +22,11 @@ function subscribeVisibility(callback: () => void) {
   return () => document.removeEventListener("visibilitychange", callback);
 }
 
-export default function SceneCanvas() {
+export default function SceneCanvas({
+  onContextLost,
+}: {
+  onContextLost?: () => void;
+}) {
   const coarse = useSyncExternalStore(
     subscribeCoarse,
     () => window.matchMedia(COARSE_QUERY).matches,
@@ -59,6 +63,16 @@ export default function SceneCanvas() {
       gl={{ antialias: false, powerPreference: "low-power" }}
       aria-hidden
       className="pointer-events-none"
+      onCreated={({ gl }) => {
+        gl.domElement.addEventListener(
+          "webglcontextlost",
+          (e) => {
+            e.preventDefault();
+            onContextLost?.();
+          },
+          { once: true },
+        );
+      }}
     >
       {/* Fog must live on the scene itself — inside a <group> it would
           silently attach to group.fog, which the renderer ignores. */}
