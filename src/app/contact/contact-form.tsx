@@ -49,7 +49,13 @@ export function ContactForm() {
       />
       <div className="space-y-2">
         <Label htmlFor="name">Your name</Label>
-        <Input id="name" name="name" required defaultValue={values?.name} />
+        <Input
+          id="name"
+          name="name"
+          required
+          defaultValue={values?.name}
+          className="focus-visible:ring-ember focus-visible:shadow-[0_0_24px_rgba(234,88,12,0.2)]"
+        />
       </div>
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
@@ -59,6 +65,7 @@ export function ContactForm() {
           type="email"
           required
           defaultValue={values?.email}
+          className="focus-visible:ring-ember focus-visible:shadow-[0_0_24px_rgba(234,88,12,0.2)]"
         />
       </div>
       <div className="space-y-2">
@@ -68,6 +75,7 @@ export function ContactForm() {
           name="budget"
           placeholder="e.g. $5k–15k, or 'no idea yet'"
           defaultValue={values?.budget}
+          className="focus-visible:ring-ember focus-visible:shadow-[0_0_24px_rgba(234,88,12,0.2)]"
         />
       </div>
       <div className="space-y-2">
@@ -78,6 +86,7 @@ export function ContactForm() {
           rows={5}
           required
           defaultValue={values?.message}
+          className="focus-visible:ring-ember focus-visible:shadow-[0_0_24px_rgba(234,88,12,0.2)]"
         />
       </div>
       {state?.status === "error" ? (

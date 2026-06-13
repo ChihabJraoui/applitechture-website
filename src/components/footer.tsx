@@ -12,13 +12,13 @@ export function Footer() {
           <p className="text-ash mt-2 max-w-xs text-sm">{site.tagline}</p>
         </div>
         <nav aria-label="Footer" className="text-ash flex gap-6 text-sm">
-          <Link href="/services" className="hover:text-warm-white">
+          <Link href="/services" className="link-sweep hover:text-warm-white">
             Services
           </Link>
-          <Link href="/about" className="hover:text-warm-white">
+          <Link href="/about" className="link-sweep hover:text-warm-white">
             About
           </Link>
-          <Link href="/contact" className="hover:text-warm-white">
+          <Link href="/contact" className="link-sweep hover:text-warm-white">
             Contact
           </Link>
         </nav>
