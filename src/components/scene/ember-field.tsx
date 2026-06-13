@@ -7,8 +7,7 @@ import { useSceneStore } from "./use-scene-store";
 
 const BOUNDS = { x: 14, y: 9, z: 6 };
 
-// Deterministic PRNG (mulberry32) — keeps the buffer-building memo pure
-// (react-hooks/purity forbids Math.random during render) and makes the
+// Deterministic PRNG (mulberry32) — keeps the buffer-building memo pure and the
 // field stable for a given particle count.
 function mulberry32(seed: number) {
   return () => {
@@ -20,28 +19,27 @@ function mulberry32(seed: number) {
   };
 }
 
+// Heat ramp endpoints — deep ember → amber → white-hot.
+const COOL = new THREE.Color("#9a3412");
+const MID = new THREE.Color("#f59e0b");
+const HOT = new THREE.Color("#fff7ed");
+const scratch = new THREE.Color();
+
 export function EmberField({ count }: { count: number }) {
   const points = useRef<THREE.Points>(null);
   const camGroup = useRef<THREE.Group>(null);
 
-  const { positions, speeds, colors } = useMemo(() => {
+  const { positions, speeds } = useMemo(() => {
     const positions = new Float32Array(count * 3);
     const speeds = new Float32Array(count);
-    const colors = new Float32Array(count * 3);
-    const ember = new THREE.Color("#ea580c");
-    const amber = new THREE.Color("#f59e0b");
     const rand = mulberry32(count);
     for (let i = 0; i < count; i++) {
       positions[i * 3] = (rand() - 0.5) * BOUNDS.x * 2;
       positions[i * 3 + 1] = (rand() - 0.5) * BOUNDS.y * 2;
       positions[i * 3 + 2] = (rand() - 0.5) * BOUNDS.z * 2;
       speeds[i] = 0.15 + rand() * 0.5;
-      const c = ember.clone().lerp(amber, rand() * 0.6);
-      colors[i * 3] = c.r;
-      colors[i * 3 + 1] = c.g;
-      colors[i * 3 + 2] = c.b;
     }
-    return { positions, speeds, colors };
+    return { positions, speeds };
   }, [count]);
 
   useFrame((_, delta) => {
@@ -50,7 +48,7 @@ export function EmberField({ count }: { count: number }) {
     const geo = points.current?.geometry;
     if (!geo) return;
     const pos = geo.attributes.position.array as Float32Array;
-    const speedScale = 0.4 + temperature * 0.9;
+    const speedScale = 0.4 + temperature * 1.0;
     for (let i = 0; i < count; i++) {
       pos[i * 3 + 1] += speeds[i] * dt * speedScale;
       pos[i * 3] += Math.sin(pos[i * 3 + 1] * 0.5 + i) * dt * 0.06;
@@ -58,9 +56,15 @@ export function EmberField({ count }: { count: number }) {
     }
     geo.attributes.position.needsUpdate = true;
 
+    // Color = temperature: red-ember → amber → white-hot, two-stage lerp.
+    const t = temperature;
+    if (t < 0.5) scratch.copy(COOL).lerp(MID, t * 2);
+    else scratch.copy(MID).lerp(HOT, (t - 0.5) * 2);
+
     const mat = points.current!.material as THREE.PointsMaterial;
-    mat.opacity = 0.25 + temperature * 0.55;
-    mat.size = 0.035 + temperature * 0.03;
+    mat.color.copy(scratch);
+    mat.opacity = 0.2 + temperature * 0.6;
+    mat.size = 0.03 + temperature * 0.05;
 
     if (camGroup.current) {
       camGroup.current.rotation.y +=
@@ -75,10 +79,9 @@ export function EmberField({ count }: { count: number }) {
       <points ref={points}>
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" args={[positions, 3]} />
-          <bufferAttribute attach="attributes-color" args={[colors, 3]} />
         </bufferGeometry>
         <pointsMaterial
-          vertexColors
+          color={COOL}
           transparent
           depthWrite={false}
           blending={THREE.AdditiveBlending}
