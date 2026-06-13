@@ -56,8 +56,8 @@ export async function sendInquiry(
     const resend = new Resend(process.env.RESEND_API_KEY);
     const { error } = await resend.emails.send({
       // onboarding@resend.dev works without domain verification;
-      // switch to a verified applitechture.com sender when the domain is set up in Resend.
-      from: "Applitechture website <onboarding@resend.dev>",
+      // switch to a verified Emberworks sender once the domain is set up in Resend.
+      from: "Emberworks website <onboarding@resend.dev>",
       to: site.email,
       replyTo: email,
       subject: `New project inquiry from ${safeName}`,

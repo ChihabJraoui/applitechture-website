@@ -6,7 +6,7 @@ import { Reveal } from "@/components/motion/reveal";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Applitechture is a software studio run by Chihab Jraoui, building apps for small businesses and startups.",
+    "Emberworks is a software studio run by Chihab Jraoui, building apps for small businesses and startups.",
 };
 
 const values = [
@@ -36,7 +36,7 @@ export default function AboutPage() {
               </h1>
               <div className="mt-8 space-y-4 text-lg">
                 <p>
-                  Applitechture is run by Chihab Jraoui, a software engineer who
+                  Emberworks is run by Chihab Jraoui, a software engineer who
                   kept watching good businesses struggle with bad software —
                   tools that almost fit, agencies that overpromised, projects
                   that quietly died.
