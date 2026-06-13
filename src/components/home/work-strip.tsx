@@ -50,7 +50,15 @@ function OutcomeStat({
   }, [active, outcome]);
 
   return (
-    <p ref={ref} className="text-ember font-display mt-auto pt-5 text-lg">
+    <p
+      ref={ref}
+      className={`font-display mt-auto pt-5 text-lg transition-colors duration-500 ${
+        active ? "text-amber" : "text-ember/70"
+      }`}
+      style={
+        active ? { textShadow: "0 0 22px rgba(245,158,11,0.55)" } : undefined
+      }
+    >
       {outcome}
     </p>
   );
@@ -64,7 +72,11 @@ function Card({
   active: boolean;
 }) {
   return (
-    <article className="border-scale bg-iron/60 flex w-[85vw] max-w-md shrink-0 flex-col rounded-2xl border p-7 backdrop-blur-sm lg:w-[32rem]">
+    <article
+      className={`border-scale bg-iron/60 flex w-[85vw] max-w-md shrink-0 flex-col rounded-2xl border p-7 backdrop-blur-sm transition-[border-color,box-shadow] duration-500 lg:w-[32rem] ${
+        active ? "border-ember/60 shadow-[0_0_60px_rgba(234,88,12,0.22)]" : ""
+      }`}
+    >
       <p className="text-ash text-sm font-medium tracking-widest uppercase">
         {c.client}
       </p>
