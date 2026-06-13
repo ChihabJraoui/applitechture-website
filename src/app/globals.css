@@ -2,22 +2,35 @@
 @import "shadcn/tailwind.css";
 
 @theme {
-  --color-coal: #0c0a09;
-  --color-char: #1c1917;
-  --color-char-light: #292524;
-  --color-warm-white: #fafaf9;
-  --color-ash: #a8a29e;
-  --color-ember: #ea580c;
+  /* ---- Substrate: the dark forge ---- */
+  --color-forge-black: #0b0705; /* page canvas (was: coal) */
+  --color-iron: #1b0f09; /* cards, elevated surfaces (was: char) */
+  --color-scale: #2a160c; /* borders, dividers, forge-grid (was: char-light) */
+  --color-warm-white: #faf3ee; /* headings + body text */
+  --color-ash: #b3a79d; /* secondary text (AA on forge-black) */
+
+  /* ---- Incandescence ramp: heat (type, linework, glow, scene) ---- */
+  --color-first-heat: #6b1a07; /* ~550°C */
+  --color-ember-dark: #9a3412; /* ~700°C deep ember + pressed states */
+  --color-ember: #ea580c; /* ~850°C working heat — primary accent */
+  --color-amber: #f59e0b; /* ~1000°C */
+  --color-yellow-hot: #fbbf24; /* ~1150°C */
+  --color-near-white: #fde047; /* ~1250°C */
+  --color-white-hot: #fff7ed; /* ~1350°C */
+
+  /* ---- Glows ---- */
   --color-ember-glow: rgba(234, 88, 12, 0.15);
-  --color-ember-dark: #9a3412;
+  --color-amber-glow: rgba(245, 158, 11, 0.18);
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-mono:
+    var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, monospace;
 }
 
 ::selection {
   background: var(--color-ember);
-  color: var(--color-coal);
+  color: var(--color-forge-black);
 }
 
 @theme inline {
@@ -50,23 +63,23 @@
 
 :root {
   --radius: 0.625rem;
-  --background: #0c0a09;
-  --foreground: #fafaf9;
-  --card: #1c1917;
-  --card-foreground: #fafaf9;
-  --popover: #1c1917;
-  --popover-foreground: #fafaf9;
+  --background: #0b0705;
+  --foreground: #faf3ee;
+  --card: #1b0f09;
+  --card-foreground: #faf3ee;
+  --popover: #1b0f09;
+  --popover-foreground: #faf3ee;
   --primary: #ea580c;
-  --primary-foreground: #fafaf9;
-  --secondary: #1c1917;
-  --secondary-foreground: #fafaf9;
-  --muted: #292524;
-  --muted-foreground: #a8a29e;
-  --accent: #292524;
-  --accent-foreground: #fafaf9;
+  --primary-foreground: #faf3ee;
+  --secondary: #1b0f09;
+  --secondary-foreground: #faf3ee;
+  --muted: #2a160c;
+  --muted-foreground: #b3a79d;
+  --accent: #2a160c;
+  --accent-foreground: #faf3ee;
   --destructive: #ef4444;
-  --border: #292524;
-  --input: #292524;
+  --border: #2a160c;
+  --input: #2a160c;
   --ring: #ea580c;
 }
 
@@ -82,31 +95,35 @@
   }
 }
 
-.cta-ember {
-  background:
-    radial-gradient(
-      ellipse 70% 80% at 50% 100%,
-      var(--color-ember-glow) 0%,
-      transparent 65%
-    ),
-    var(--color-coal);
+/* CTA — the white-hot inversion: bright forged core, cooling to forge-black edges */
+.cta-forge {
+  background: radial-gradient(
+    ellipse 78% 95% at 50% 50%,
+    var(--color-white-hot) 0%,
+    var(--color-near-white) 20%,
+    var(--color-amber) 42%,
+    var(--color-ember) 62%,
+    var(--color-first-heat) 82%,
+    var(--color-forge-black) 100%
+  );
 }
 
+/* Static fallback backdrop (reduced-motion / no-WebGL) — the cold forge */
 .ember-backdrop {
   position: absolute;
   inset: 0;
   background:
     radial-gradient(
-      ellipse 60% 50% at 70% 15%,
-      rgba(234, 88, 12, 0.1) 0%,
+      ellipse 60% 50% at 70% 12%,
+      rgba(234, 88, 12, 0.12) 0%,
       transparent 60%
     ),
     radial-gradient(
-      ellipse 50% 40% at 20% 80%,
-      rgba(234, 88, 12, 0.06) 0%,
-      transparent 60%
+      ellipse 55% 45% at 18% 85%,
+      rgba(245, 158, 11, 0.07) 0%,
+      transparent 62%
     ),
-    var(--color-coal);
+    var(--color-forge-black);
 }
 
 /* Hide split headings until GSAP takes over — only when motion is active. */
@@ -114,8 +131,13 @@
   visibility: hidden;
 }
 
+/* Heat-sweep underline: an ember→amber band drawn in on hover/focus */
 .link-sweep {
-  background-image: linear-gradient(currentColor, currentColor);
+  background-image: linear-gradient(
+    90deg,
+    var(--color-ember),
+    var(--color-amber)
+  );
   background-size: 0% 1px;
   background-repeat: no-repeat;
   background-position: 0 100%;
