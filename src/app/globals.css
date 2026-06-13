@@ -15,7 +15,7 @@
   --color-ember: #ea580c; /* ~850°C working heat — primary accent */
   --color-amber: #f59e0b; /* ~1000°C */
   --color-yellow-hot: #fbbf24; /* ~1150°C */
-  --color-near-white: #fde047; /* ~1250°C */
+  --color-forge-yellow: #fde047; /* ~1250°C */
   --color-white-hot: #fff7ed; /* ~1350°C */
 
   /* ---- Glows ---- */
@@ -100,7 +100,7 @@
   background: radial-gradient(
     ellipse 78% 95% at 50% 50%,
     var(--color-white-hot) 0%,
-    var(--color-near-white) 20%,
+    var(--color-forge-yellow) 20%,
     var(--color-amber) 42%,
     var(--color-ember) 62%,
     var(--color-first-heat) 82%,
@@ -112,6 +112,7 @@
 .ember-backdrop {
   position: absolute;
   inset: 0;
+  /* rgba stops kept softer than the glow tokens — the static fallback needs gentler halos */
   background:
     radial-gradient(
       ellipse 60% 50% at 70% 12%,
