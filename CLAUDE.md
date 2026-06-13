@@ -25,7 +25,7 @@ No test suite — build + lint are the quality gates.
 - **UI primitives:** shadcn/ui form components in `src/components/ui` (dark surface; `dark` class on `<html>`)
 - **Email:** Resend via server action
 - **Deployment:** Vercel
-- **Motion:** three + @react-three/fiber (persistent WebGL scene), gsap + ScrollTrigger + SplitText, lenis smooth scroll, zustand
+- **Motion:** gsap + ScrollTrigger + SplitText, lenis smooth scroll
 
 **Incandescence Ramp tokens** (`@theme` in `globals.css`):
 
@@ -83,17 +83,12 @@ Routes: `/` `/services` `/services/[slug]` (SSG ×4) `/about` `/contact` + `site
 - ScrollTrigger refresh after fonts load.
 - Teardown rule: **never call `ScrollTrigger.killAll()`**. Every animating component scopes its triggers inside `gsap.context()` and reverts on cleanup. The provider only tears down what it owns.
 
-**`src/components/scene/`** — persistent R3F forge spark field:
+**Background.** The page background is the static `.ember-backdrop` forge gradient, rendered by `ForgeBackdrop` (`src/components/forge-backdrop.tsx`) — a server component with no JS. There is no WebGL layer; `three`, `@react-three/fiber`, and `zustand` are not installed.
 
-- `scene-canvas.tsx`: fixed full-viewport canvas (`position: fixed; inset: 0; z-index: -10`), mounted once in the root layout, survives route changes. Dynamically imported so first paint never waits on the Three.js chunk.
-- `ember-field.tsx`: 2–3k forge spark particles (mobile: ~600). A single `pointsMaterial.color` lerps along the heat ramp (deep-ember → amber → white-hot) driven by the `temperature` store each frame; brightness, size, and drift all climb with heat. Reads scene store per frame via `getState()`.
-- `use-scene-store.ts`: zustand store exposing `temperature` + `pointer` (and their setters). Scene reads via `getState()` only — no per-frame React re-renders.
-- **Fallback chain:** `prefers-reduced-motion` → no-WebGL capability → WebGL context-loss → `.ember-backdrop` static gradient (retoned to forge-black). The canvas is wrapped in an error boundary that degrades to the gradient; scene/motion errors never block content.
-
-**Motion primitives** in `src/components/motion/`: `Reveal`, `SplitHeading`, `Magnetic`, `TemperatureDriver`. All consume `useReducedMotion` and no-op when reduced motion is active.
+**Motion primitives** in `src/components/motion/`: `Reveal`, `SplitHeading`, `Magnetic`. All consume `useReducedMotion` and no-op when reduced motion is active.
 
 **Pinned sections** (`home/work-strip.tsx` horizontal scroll, `home/process-pinned.tsx` sequential) require `(pointer: fine)` + non-reduced-motion; they fall back to static stacked layouts on touch/reduced. Use `invalidateOnRefresh: true` and functional `start`/`end` callbacks for resize safety.
 
 **Progressive enhancement.** Content is server-rendered and never hidden pre-JS. A `js-motion` class on `<html>` (applied client-side) gates the only pre-animation hide: `.js-motion [data-split] { visibility: hidden }`. Crawlers and JS-off users see full content.
 
-**Performance budget.** Mobile Lighthouse: performance ≥ 80 (accepted cost of immersive layer), accessibility ≥ 95, SEO 100. DPR capped at 1.5; canvas pauses on page visibility hidden.
+**Performance budget.** Mobile Lighthouse: performance ≥ 90 (no WebGL overhead), accessibility ≥ 95, SEO 100.

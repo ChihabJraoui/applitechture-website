@@ -60,6 +60,8 @@ One hue. Not a flat orange — the real color-temperature of heated steel. This 
 
 ## The persistent scene (R3F) — reframed, not rebuilt
 
+> **Update (post-launch, per user feedback):** the WebGL spark field was removed — it read as a generic particle effect. The background is now the static `.ember-backdrop` forge gradient; `three`/`@react-three/fiber`/`zustand` were uninstalled. The heat narrative now lives entirely in the type, palette, and the white-hot CTA inversion.
+
 The existing `ember-field` + `use-scene-store` (`temperature`, `pointer`) get *meaning*:
 
 - Embers become **forge sparks**. The scene reads `temperature` per frame and maps it onto the **incandescence ramp** — color, density, drift speed, opacity/size all climb with heat.
