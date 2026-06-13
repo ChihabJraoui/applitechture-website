@@ -24,28 +24,35 @@ export function SplitHeading({
     let split: SplitText | undefined;
     let ctx: gsap.Context | undefined;
     try {
-      split = new SplitText(target, { type: "words", tag: "span" });
+      split = new SplitText(target, { type: "chars", tag: "span" });
       ctx = gsap.context(() => {
         const em = ref.current!.querySelector("em");
         const tl = gsap.timeline();
-        tl.from(split!.words, {
-          yPercent: 60,
+        // Heat-wipe: letters ignite from cold iron to warm-white, left → right.
+        tl.from(split!.chars, {
+          color: "#3a241a",
+          yPercent: 40,
           autoAlpha: 0,
-          stagger: 0.06,
-          duration: 0.8,
-          ease: "power3.out",
+          duration: 0.5,
+          ease: "power2.out",
+          stagger: { each: 0.025, from: "start" },
         });
         if (em) {
           tl.fromTo(
             em,
-            { textShadow: "0 0 0px rgba(234,88,12,0)" },
+            { textShadow: "0 0 0px rgba(245,158,11,0)" },
             {
-              textShadow: "0 0 24px rgba(234,88,12,0.55)",
+              textShadow:
+                "0 0 28px rgba(245,158,11,0.7), 0 0 6px rgba(255,247,237,0.5)",
               duration: 0.6,
               ease: "power2.out",
             },
-            "-=0.2",
-          ).to(em, { textShadow: "0 0 12px rgba(234,88,12,0.3)", duration: 1.2 });
+            "-=0.25",
+          ).to(em, {
+            textShadow: "0 0 14px rgba(234,88,12,0.4)",
+            duration: 1.4,
+            ease: "sine.inOut",
+          });
         }
       }, ref);
     } catch {
