@@ -45,6 +45,7 @@ export function TemperatureDriver() {
       end: () => document.documentElement.scrollHeight - window.innerHeight,
       onUpdate: (self) => set(tempForProgress(self.progress)),
     });
+    set(tempForProgress(st.progress));
     return () => st.kill();
   }, [reduced, pathname]);
 
