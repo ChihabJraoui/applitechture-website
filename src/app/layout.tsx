@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { MotionProvider } from "@/components/motion/motion-provider";
+import { SceneRoot } from "@/components/scene/scene-root";
 import { site } from "@/content/site";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -45,6 +46,7 @@ export default function RootLayout({
           }}
         />
         <MotionProvider>
+          <SceneRoot />
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
