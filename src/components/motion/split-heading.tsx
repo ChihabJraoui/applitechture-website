@@ -26,13 +26,14 @@ export function SplitHeading({
     try {
       split = new SplitText(target, { type: "chars", tag: "span" });
       ctx = gsap.context(() => {
+        gsap.set(target, { visibility: "visible" });
         const em = ref.current!.querySelector("em");
         const tl = gsap.timeline();
         // Heat-wipe: letters ignite from cold iron to warm-white, left → right.
         tl.from(split!.chars, {
           color: "#3a241a",
           yPercent: 40,
-          autoAlpha: 0,
+          opacity: 0,
           duration: 0.5,
           ease: "power2.out",
           stagger: { each: 0.025, from: "start" },
