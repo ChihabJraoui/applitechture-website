@@ -16,18 +16,23 @@ export default function OgImage() {
         flexDirection: "column",
         justifyContent: "center",
         padding: 80,
-        background: "#0c0a09",
-        color: "#fafaf9",
+        background: "#0b0705",
+        color: "#faf3ee",
       }}
     >
       <div style={{ fontSize: 36, fontWeight: 600, display: "flex" }}>
-        applitechture<span style={{ color: "#ea580c" }}>.</span>
+        emberworks<span style={{ color: "#ea580c" }}>.</span>
       </div>
       <div style={{ fontSize: 72, marginTop: 32, fontWeight: 500 }}>
         {site.tagline}
       </div>
       <div
-        style={{ fontSize: 28, marginTop: 24, color: "#a8a29e", maxWidth: 800 }}
+        style={{
+          fontSize: 28,
+          marginTop: 24,
+          color: "#b3a79d",
+          maxWidth: 800,
+        }}
       >
         {site.description}
       </div>

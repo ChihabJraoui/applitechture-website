@@ -13,14 +13,14 @@ export default function Icon() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#0c0a09",
-        color: "#fafaf9",
+        background: "#0b0705",
+        color: "#faf3ee",
         fontSize: 22,
         fontWeight: 700,
         borderRadius: 6,
       }}
     >
-      a<span style={{ color: "#ea580c" }}>.</span>
+      e<span style={{ color: "#ea580c" }}>.</span>
     </div>,
     size,
   );
