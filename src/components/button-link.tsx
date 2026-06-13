@@ -6,6 +6,8 @@ const styles = {
   secondary:
     "rounded-full border border-scale bg-iron px-6 py-3 text-warm-white transition-colors hover:border-ember",
   ghost: "py-3 text-ember link-sweep",
+  onHot:
+    "rounded-full bg-forge-black px-6 py-3 text-white-hot hover:bg-iron active:bg-ember-dark",
 } as const;
 
 export function ButtonLink({
