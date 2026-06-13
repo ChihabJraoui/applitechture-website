@@ -64,10 +64,7 @@ export function ProcessPinned() {
       ref={wrap}
       className={pinnable ? "flex min-h-screen flex-col justify-center" : ""}
     >
-      <div
-        aria-hidden
-        className="bg-char-light relative mb-8 hidden h-px sm:block"
-      >
+      <div aria-hidden className="bg-scale relative mb-8 hidden h-px sm:block">
         <div
           className="bg-ember absolute inset-y-0 left-0 transition-[width]"
           style={{ width: `${effectiveProgress * 100}%` }}
@@ -77,7 +74,7 @@ export function ProcessPinned() {
         {processSteps.map((step, i) => (
           <li
             key={step.title}
-            className={`bg-char rounded-2xl p-7 transition-all duration-500 ${
+            className={`bg-iron rounded-2xl p-7 transition-all duration-500 ${
               i < litCount ? "opacity-100" : "opacity-35"
             }`}
           >

@@ -64,7 +64,7 @@ function Card({
   active: boolean;
 }) {
   return (
-    <article className="border-char-light bg-char/60 flex w-[85vw] max-w-md shrink-0 flex-col rounded-2xl border p-7 backdrop-blur-sm lg:w-[32rem]">
+    <article className="border-scale bg-iron/60 flex w-[85vw] max-w-md shrink-0 flex-col rounded-2xl border p-7 backdrop-blur-sm lg:w-[32rem]">
       <p className="text-ash text-sm font-medium tracking-widest uppercase">
         {c.client}
       </p>

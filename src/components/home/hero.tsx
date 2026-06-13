@@ -31,7 +31,7 @@ export function Hero() {
           </div>
         </Reveal>
         <div aria-hidden className="mt-20 flex justify-center">
-          <div className="scroll-cue border-char-light h-10 w-6 rounded-full border">
+          <div className="scroll-cue border-scale h-10 w-6 rounded-full border">
             <div className="bg-ember mx-auto mt-2 h-2 w-1 rounded-full" />
           </div>
         </div>

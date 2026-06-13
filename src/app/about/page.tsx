@@ -55,7 +55,7 @@ export default function AboutPage() {
             <div className="grid gap-5 sm:grid-cols-3">
               {values.map((v, i) => (
                 <Reveal key={v.title} delay={i * 0.08} className="h-full">
-                  <div className="bg-char h-full rounded-2xl p-6">
+                  <div className="bg-iron h-full rounded-2xl p-6">
                     <h3 className="font-display text-lg">{v.title}</h3>
                     <p className="text-ash mt-2 text-sm">{v.text}</p>
                   </div>

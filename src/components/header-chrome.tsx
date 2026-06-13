@@ -18,7 +18,7 @@ export function HeaderChrome({ children }: { children: React.ReactNode }) {
     <header
       className={`sticky top-0 z-40 transition-colors duration-300 ${
         scrolled
-          ? "border-char-light bg-coal/75 border-b backdrop-blur-md"
+          ? "border-scale bg-forge-black/75 border-b backdrop-blur-md"
           : "border-b border-transparent bg-transparent"
       }`}
     >

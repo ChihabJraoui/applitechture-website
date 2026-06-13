@@ -6,7 +6,7 @@ import { services } from "@/content/services";
 
 export function ServicesSection() {
   return (
-    <section className="bg-char/30 py-20">
+    <section className="bg-iron/30 py-20">
       <Container>
         <SectionHeading eyebrow="Services" title="Four ways we help">
           Whether you need an app built, a product designed, work automated, or
@@ -17,7 +17,7 @@ export function ServicesSection() {
             <Reveal key={s.slug} delay={i * 0.08} className="h-full">
               <Link
                 href={`/services/${s.slug}`}
-                className="group border-char-light bg-char hover:border-ember h-full rounded-2xl border p-7 transition-[color,transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(234,88,12,0.15)]"
+                className="group border-scale bg-iron hover:border-ember h-full rounded-2xl border p-7 transition-[color,transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(234,88,12,0.15)]"
               >
                 <h3 className="font-display text-xl">{s.title}</h3>
                 <p className="text-ash mt-2 text-sm">{s.summary}</p>

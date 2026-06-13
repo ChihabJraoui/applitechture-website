@@ -9,7 +9,7 @@ export function AboutTeaser() {
         <Reveal>
           <div
             aria-hidden
-            className="bg-char font-display text-ember flex h-28 w-28 shrink-0 items-center justify-center rounded-full text-3xl"
+            className="bg-iron font-display text-ember flex h-28 w-28 shrink-0 items-center justify-center rounded-full text-3xl"
           >
             CJ
           </div>

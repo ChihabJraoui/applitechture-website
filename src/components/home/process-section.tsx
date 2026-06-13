@@ -4,7 +4,7 @@ import { ProcessPinned } from "@/components/home/process-pinned";
 
 export function ProcessSection() {
   return (
-    <section className="bg-char/30 py-20">
+    <section className="bg-iron/30 py-20">
       <Container>
         <SectionHeading eyebrow="How we work" title="No mystery, no jargon" />
         <ProcessPinned />

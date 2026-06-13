@@ -24,7 +24,7 @@ export function ContactForm() {
 
   if (state?.status === "success") {
     return (
-      <div className="bg-char rounded-2xl p-8">
+      <div className="bg-iron rounded-2xl p-8">
         <h2 className="font-display text-2xl">Thank you — message received.</h2>
         <p className="text-ash mt-2">
           We read every inquiry personally and reply within one business day.

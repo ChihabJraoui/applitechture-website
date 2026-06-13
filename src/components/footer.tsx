@@ -5,7 +5,7 @@ import { site } from "@/content/site";
 
 export function Footer() {
   return (
-    <footer className="border-char-light bg-coal border-t">
+    <footer className="border-scale bg-forge-black border-t">
       <Container className="flex flex-col gap-6 py-10 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <Wordmark />

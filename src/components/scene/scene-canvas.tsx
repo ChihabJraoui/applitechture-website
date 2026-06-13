@@ -76,7 +76,7 @@ export default function SceneCanvas({
     >
       {/* Fog must live on the scene itself — inside a <group> it would
           silently attach to group.fog, which the renderer ignores. */}
-      <fog attach="fog" args={["#0c0a09", 6, 16]} />
+      <fog attach="fog" args={["#0b0705", 6, 16]} />
       <EmberField count={count} />
     </Canvas>
   );

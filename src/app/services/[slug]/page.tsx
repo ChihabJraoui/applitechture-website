@@ -80,7 +80,7 @@ export default async function ServicePage({
 
             {caseStudy ? (
               <Reveal delay={0.32}>
-                <aside className="bg-char mt-12 rounded-2xl p-7">
+                <aside className="bg-iron mt-12 rounded-2xl p-7">
                   <p className="text-ash text-sm font-medium tracking-widest uppercase">
                     {caseStudy.client}
                   </p>
