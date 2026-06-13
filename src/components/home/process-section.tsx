@@ -6,7 +6,7 @@ export function ProcessSection() {
   return (
     <section className="bg-iron/30 py-20">
       <Container>
-        <SectionHeading eyebrow="How we work" title="No mystery, no jargon" />
+        <SectionHeading eyebrow="How we work" title="Heat · Hammer · Temper" />
         <ProcessPinned />
       </Container>
     </section>
