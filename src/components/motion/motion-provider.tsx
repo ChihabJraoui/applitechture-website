@@ -1,6 +1,11 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useSyncExternalStore,
+} from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
@@ -8,19 +13,20 @@ import Lenis from "lenis";
 const ReducedMotionContext = createContext(false);
 export const useReducedMotion = () => useContext(ReducedMotionContext);
 
-export function MotionProvider({ children }: { children: React.ReactNode }) {
-  // Lazy initializer reads the media query on the client; SSR defaults to false.
-  const [reduced, setReduced] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  });
+const QUERY = "(prefers-reduced-motion: reduce)";
 
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const onChange = (e: MediaQueryListEvent) => setReduced(e.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
+function subscribe(callback: () => void) {
+  const mq = window.matchMedia(QUERY);
+  mq.addEventListener("change", callback);
+  return () => mq.removeEventListener("change", callback);
+}
+
+export function MotionProvider({ children }: { children: React.ReactNode }) {
+  const reduced = useSyncExternalStore(
+    subscribe,
+    () => window.matchMedia(QUERY).matches,
+    () => false, // server snapshot — keeps SSR and hydration consistent
+  );
 
   useEffect(() => {
     if (reduced) {
