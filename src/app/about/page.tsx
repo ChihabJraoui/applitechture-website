@@ -30,7 +30,7 @@ export default function AboutPage() {
         <Container>
           <div className="max-w-3xl">
             <h1 className="font-display text-4xl sm:text-5xl">
-              A small studio, <em className="text-terracotta">on purpose.</em>
+              A small studio, <em className="text-ember">on purpose.</em>
             </h1>
             <div className="mt-8 space-y-4 text-lg">
               <p>
@@ -46,14 +46,14 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <h2 className="text-terracotta-dark mt-14 mb-6 text-sm font-medium tracking-widest uppercase">
+            <h2 className="text-ember mt-14 mb-6 text-sm font-medium tracking-widest uppercase">
               What we believe
             </h2>
             <div className="grid gap-5 sm:grid-cols-3">
               {values.map((v) => (
-                <div key={v.title} className="bg-sand rounded-2xl p-6">
+                <div key={v.title} className="bg-char rounded-2xl p-6">
                   <h3 className="font-display text-lg">{v.title}</h3>
-                  <p className="text-stone mt-2 text-sm">{v.text}</p>
+                  <p className="text-ash mt-2 text-sm">{v.text}</p>
                 </div>
               ))}
             </div>

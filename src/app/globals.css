@@ -2,12 +2,13 @@
 @import "shadcn/tailwind.css";
 
 @theme {
-  --color-cream: #faf6f1;
-  --color-sand: #f0e9df;
-  --color-sand-dark: #e7ddd0;
-  --color-ink: #1c1917;
-  --color-stone: #6e6862;
-  --color-terracotta: #c2410c;
+  --color-coal: #0c0a09;
+  --color-char: #1c1917;
+  --color-char-light: #292524;
+  --color-warm-white: #fafaf9;
+  --color-ash: #a8a29e;
+  --color-ember: #ea580c;
+  --color-ember-glow: rgba(234, 88, 12, 0.15);
   --color-terracotta-dark: #9a3412;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -15,8 +16,8 @@
 }
 
 ::selection {
-  background: var(--color-terracotta);
-  color: var(--color-cream);
+  background: var(--color-ember);
+  color: var(--color-coal);
 }
 
 @theme inline {
@@ -48,25 +49,25 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
   --radius: 0.625rem;
+  --background: #0c0a09;
+  --foreground: #fafaf9;
+  --card: #1c1917;
+  --card-foreground: #fafaf9;
+  --popover: #1c1917;
+  --popover-foreground: #fafaf9;
+  --primary: #ea580c;
+  --primary-foreground: #fafaf9;
+  --secondary: #1c1917;
+  --secondary-foreground: #fafaf9;
+  --muted: #292524;
+  --muted-foreground: #a8a29e;
+  --accent: #292524;
+  --accent-foreground: #fafaf9;
+  --destructive: #ef4444;
+  --border: #292524;
+  --input: #292524;
+  --ring: #ea580c;
 }
 
 @layer base {
@@ -79,4 +80,14 @@
   html {
     @apply font-sans;
   }
+}
+
+.cta-ember {
+  background:
+    radial-gradient(
+      ellipse 70% 80% at 50% 100%,
+      rgba(234, 88, 12, 0.18) 0%,
+      transparent 65%
+    ),
+    #0c0a09;
 }

@@ -10,9 +10,9 @@ export default function NotFound() {
       <Container>
         <div className="mx-auto max-w-xl text-center">
           <h1 className="font-display text-5xl">
-            Page not <em className="text-terracotta">found.</em>
+            Page not <em className="text-ember">found.</em>
           </h1>
-          <p className="text-stone mt-4">
+          <p className="text-ash mt-4">
             This page doesn&apos;t exist — but the studio does.
           </p>
           <div className="mt-8">

@@ -16,9 +16,9 @@ export default function ServicesPage() {
       <section className="py-20">
         <Container>
           <h1 className="font-display max-w-2xl text-4xl sm:text-5xl">
-            What we <em className="text-terracotta">do.</em>
+            What we <em className="text-ember">do.</em>
           </h1>
-          <p className="text-stone mt-5 max-w-xl">
+          <p className="text-ash mt-5 max-w-xl">
             Four services, one rule: the work has to pay for itself. If we
             don&apos;t think it will, we&apos;ll say so on the first call.
           </p>
@@ -27,12 +27,12 @@ export default function ServicesPage() {
               <Link
                 key={s.slug}
                 href={`/services/${s.slug}`}
-                className="border-sand-dark hover:border-terracotta rounded-2xl border p-7 transition-colors"
+                className="border-char-light hover:border-ember rounded-2xl border p-7 transition-colors"
               >
                 <h2 className="font-display text-2xl">{s.title}</h2>
-                <p className="text-stone mt-3 text-sm">{s.summary}</p>
-                <p className="text-stone mt-4 text-sm">{s.problem}</p>
-                <p className="text-terracotta mt-5 text-sm font-medium">
+                <p className="text-ash mt-3 text-sm">{s.summary}</p>
+                <p className="text-ash mt-4 text-sm">{s.problem}</p>
+                <p className="text-ember mt-5 text-sm font-medium">
                   Learn more →
                 </p>
               </Link>

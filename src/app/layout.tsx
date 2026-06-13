@@ -29,7 +29,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
-      <body className="bg-cream text-ink flex min-h-screen flex-col font-sans antialiased">
+      <body className="bg-coal text-warm-white flex min-h-screen flex-col font-sans antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

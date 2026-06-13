@@ -5,27 +5,27 @@ import { site } from "@/content/site";
 
 export function Footer() {
   return (
-    <footer className="border-sand-dark bg-cream border-t">
+    <footer className="border-char-light bg-coal border-t">
       <Container className="flex flex-col gap-6 py-10 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <Wordmark />
-          <p className="text-stone mt-2 max-w-xs text-sm">{site.tagline}</p>
+          <p className="text-ash mt-2 max-w-xs text-sm">{site.tagline}</p>
         </div>
-        <nav aria-label="Footer" className="text-stone flex gap-6 text-sm">
-          <Link href="/services" className="hover:text-ink">
+        <nav aria-label="Footer" className="text-ash flex gap-6 text-sm">
+          <Link href="/services" className="hover:text-warm-white">
             Services
           </Link>
-          <Link href="/about" className="hover:text-ink">
+          <Link href="/about" className="hover:text-warm-white">
             About
           </Link>
-          <Link href="/contact" className="hover:text-ink">
+          <Link href="/contact" className="hover:text-warm-white">
             Contact
           </Link>
         </nav>
-        <div className="text-stone text-sm">
+        <div className="text-ash text-sm">
           <a
             href={`mailto:${site.email}`}
-            className="text-terracotta hover:underline"
+            className="text-ember hover:underline"
           >
             {site.email}
           </a>

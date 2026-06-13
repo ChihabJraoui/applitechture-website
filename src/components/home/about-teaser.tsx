@@ -7,12 +7,12 @@ export function AboutTeaser() {
       <Container className="flex flex-col items-start gap-8 sm:flex-row sm:items-center">
         <div
           aria-hidden
-          className="bg-sand font-display text-terracotta flex h-28 w-28 shrink-0 items-center justify-center rounded-full text-3xl"
+          className="bg-char font-display text-ember flex h-28 w-28 shrink-0 items-center justify-center rounded-full text-3xl"
         >
           CJ
         </div>
         <div>
-          <p className="text-terracotta-dark mb-3 text-sm font-medium tracking-widest uppercase">
+          <p className="text-ember mb-3 text-sm font-medium tracking-widest uppercase">
             Who&apos;s behind this
           </p>
           <p className="font-display max-w-2xl text-2xl leading-snug">

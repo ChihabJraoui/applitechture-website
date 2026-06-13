@@ -24,9 +24,9 @@ export function ContactForm() {
 
   if (state?.status === "success") {
     return (
-      <div className="bg-sand rounded-2xl p-8">
+      <div className="bg-char rounded-2xl p-8">
         <h2 className="font-display text-2xl">Thank you — message received.</h2>
-        <p className="text-stone mt-2">
+        <p className="text-ash mt-2">
           We read every inquiry personally and reply within one business day.
         </p>
       </div>
@@ -81,14 +81,14 @@ export function ContactForm() {
         />
       </div>
       {state?.status === "error" ? (
-        <p role="alert" className="text-terracotta text-sm">
+        <p role="alert" className="text-ember text-sm">
           {state.message}
         </p>
       ) : null}
       <Button
         type="submit"
         disabled={pending}
-        className="bg-terracotta hover:bg-terracotta-dark rounded-full px-8"
+        className="bg-ember hover:bg-ember/90 active:bg-terracotta-dark rounded-full px-8"
       >
         {pending ? "Sending…" : "Send message"}
       </Button>

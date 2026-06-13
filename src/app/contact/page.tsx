@@ -15,17 +15,17 @@ export default function ContactPage() {
         <div className="mx-auto grid max-w-4xl gap-12 lg:grid-cols-[1fr_1.2fr]">
           <div>
             <h1 className="font-display text-4xl sm:text-5xl">
-              Let&apos;s <em className="text-terracotta">talk.</em>
+              Let&apos;s <em className="text-ember">talk.</em>
             </h1>
-            <p className="text-stone mt-5">
+            <p className="text-ash mt-5">
               A few sentences about your business and what&apos;s in the way. No
               preparation needed — plain language welcome.
             </p>
-            <p className="text-stone mt-5 text-sm">
+            <p className="text-ash mt-5 text-sm">
               Prefer email?{" "}
               <a
                 href={`mailto:${site.email}`}
-                className="text-terracotta hover:underline"
+                className="text-ember hover:underline"
               >
                 {site.email}
               </a>
