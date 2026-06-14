@@ -87,7 +87,7 @@ Routes: `/` `/services` `/services/[slug]` (SSG ×4) `/about` `/contact` + `site
 
 **Motion primitives** in `src/components/motion/`: `Reveal`, `SplitHeading`, `Magnetic`. All consume `useReducedMotion` and no-op when reduced motion is active.
 
-**Pinned sections** (`home/work-strip.tsx` horizontal scroll, `home/process-pinned.tsx` sequential) require `(pointer: fine)` + non-reduced-motion; they fall back to static stacked layouts on touch/reduced. Use `invalidateOnRefresh: true` and functional `start`/`end` callbacks for resize safety.
+**Home sections** (Services, Work, Process) are consistent responsive grids that reveal on scroll via `Reveal`. Work's outcome stats count up the first time each card enters view (IntersectionObserver); Process's numerals warm by index (deep-ember → ember → amber) under a gradient heat-line. Earlier pinned horizontal-scroll (work) and pinned sequential (process) treatments were removed for a gap-free, consistent layout — `work-strip.tsx` / `process-pinned.tsx` now export plain grids.
 
 **Progressive enhancement.** Content is server-rendered and never hidden pre-JS. A `js-motion` class on `<html>` (applied client-side) gates the only pre-animation hide: `.js-motion [data-split] { visibility: hidden }`. Crawlers and JS-off users see full content.
 
