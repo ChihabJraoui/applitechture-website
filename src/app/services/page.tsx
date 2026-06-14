@@ -30,7 +30,7 @@ export default function ServicesPage() {
               <Reveal key={s.slug} delay={i * 0.06} className="h-full">
                 <Link
                   href={`/services/${s.slug}`}
-                  className="group border-scale hover:border-ember h-full rounded-2xl border p-7 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:shadow-[0_0_50px_rgba(245,158,11,0.18)]"
+                  className="group border-scale hover:border-ember flex h-full flex-col rounded-2xl border p-7 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:shadow-[0_0_50px_rgba(245,158,11,0.18)]"
                 >
                   <h2 className="font-display text-2xl">{s.title}</h2>
                   <p className="text-ash mt-3 text-sm">{s.summary}</p>

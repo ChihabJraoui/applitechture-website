@@ -17,7 +17,7 @@ export function ServicesSection() {
             <Reveal key={s.slug} delay={i * 0.08} className="h-full">
               <Link
                 href={`/services/${s.slug}`}
-                className="group border-scale bg-iron hover:border-ember relative h-full rounded-2xl border p-7 transition-[color,transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:shadow-[0_0_50px_rgba(245,158,11,0.18)]"
+                className="group border-scale bg-iron hover:border-ember relative flex h-full flex-col rounded-2xl border p-7 transition-[color,transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:shadow-[0_0_50px_rgba(245,158,11,0.18)]"
               >
                 <span
                   aria-hidden="true"
