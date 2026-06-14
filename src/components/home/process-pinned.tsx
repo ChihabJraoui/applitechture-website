@@ -1,111 +1,45 @@
 "use client";
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+// Renders the process steps as a clean responsive grid (matches Services/Work).
+// Each step burns a little hotter than the last; a gradient heat-line sits above.
 import { processSteps } from "@/content/process";
-import { useReducedMotion } from "@/components/motion/motion-provider";
+import { Reveal } from "@/components/motion/reveal";
 
-if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
-
-const FINE_QUERY = "(pointer: fine)";
-
-function subscribeFine(callback: () => void) {
-  const mq = window.matchMedia(FINE_QUERY);
-  mq.addEventListener("change", callback);
-  return () => mq.removeEventListener("change", callback);
-}
-
-const emptySubscribe = () => () => {};
+const HEAT = ["text-ember-dark", "text-ember", "text-amber"];
 
 export function ProcessPinned() {
-  const wrap = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotion();
-  const [progress, setProgress] = useState(0);
-
-  // pinnable = mounted && (pointer:fine) && !reduced (useSyncExternalStore pattern).
-  // When NOT pinnable, effectiveProgress is forced to 1 (all steps lit).
-  const mounted = useSyncExternalStore(
-    emptySubscribe,
-    () => true,
-    () => false,
-  );
-  const fine = useSyncExternalStore(
-    subscribeFine,
-    () => window.matchMedia(FINE_QUERY).matches,
-    () => false,
-  );
-  const pinnable = mounted && fine && !reduced;
-
-  useEffect(() => {
-    if (!pinnable || !wrap.current) return;
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: wrap.current,
-        start: "top top",
-        end: "+=140%",
-        pin: true,
-        scrub: 0.5,
-        onUpdate: (self) => setProgress(self.progress),
-      });
-    }, wrap);
-    return () => ctx.revert();
-  }, [pinnable]);
-
-  const effectiveProgress = pinnable ? progress : 1;
-  const litCount = Math.min(
-    processSteps.length,
-    Math.floor(effectiveProgress * processSteps.length) +
-      (effectiveProgress > 0.02 ? 1 : 0),
-  );
-
   return (
-    <div
-      ref={wrap}
-      className={pinnable ? "flex min-h-screen flex-col justify-center" : ""}
-    >
+    <div>
       <div aria-hidden className="bg-scale relative mb-8 hidden h-px sm:block">
         <div
-          className="absolute inset-y-0 left-0 transition-[width]"
+          className="absolute inset-0"
           style={{
-            width: `${effectiveProgress * 100}%`,
             background: "linear-gradient(90deg, #9a3412, #ea580c, #f59e0b)",
             boxShadow: "0 0 12px rgba(245,158,11,0.5)",
           }}
         />
       </div>
-      <ol className="grid gap-5 sm:grid-cols-3">
-        {processSteps.map((step, i) => {
-          const lit = i < litCount;
-          // Each step burns hotter than the one before it.
-          const heat =
-            ["text-ember-dark", "text-ember", "text-amber"][i] ?? "text-amber";
-          return (
-            <li
-              key={step.title}
-              className={`bg-iron rounded-2xl p-7 transition-all duration-500 ${
-                lit ? "opacity-100" : "opacity-35"
-              }`}
-              style={
-                lit
-                  ? {
-                      boxShadow: `0 0 ${20 + i * 16}px rgba(234,88,12,${0.12 + i * 0.06})`,
-                    }
-                  : undefined
-              }
+      <div className="grid gap-5 sm:grid-cols-3">
+        {processSteps.map((step, i) => (
+          <Reveal key={step.title} delay={i * 0.1} className="h-full">
+            <div
+              className="bg-iron flex h-full flex-col rounded-2xl p-7"
+              style={{
+                boxShadow: `0 0 ${20 + i * 16}px rgba(234,88,12,${0.1 + i * 0.05})`,
+              }}
             >
               <p
                 aria-hidden="true"
-                className={`font-display text-3xl ${lit ? heat : "text-ash"}`}
+                className={`font-display text-3xl ${HEAT[i] ?? "text-amber"}`}
               >
                 {i + 1}
               </p>
               <h3 className="font-display mt-3 text-xl">{step.title}</h3>
               <p className="text-ash mt-2 text-sm">{step.description}</p>
-            </li>
-          );
-        })}
-      </ol>
+            </div>
+          </Reveal>
+        ))}
+      </div>
     </div>
   );
 }
